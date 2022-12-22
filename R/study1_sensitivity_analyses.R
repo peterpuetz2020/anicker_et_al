@@ -157,7 +157,7 @@ results <- get_power_logistic(
 
 # save results
 write.table(
-  results,
+  apply(results, 1, mean),
   "results/logistic_power_inta_ccc.dat",
   row.names = FALSE,
   col.names = FALSE
@@ -184,7 +184,7 @@ results <- get_power_logistic(
 
 # save results
 write.table(
-  results,
+  apply(results, 1, mean),
   "results/logistic_power_inta_ccp.dat",
   row.names = FALSE,
   col.names = FALSE
@@ -212,7 +212,7 @@ results <- get_power_logistic(
 
 # save results
 write.table(
-  results,
+  apply(results, 1, mean),
   "results/logistic_power_intb_ccc.dat",
   row.names = FALSE,
   col.names = FALSE
@@ -240,7 +240,7 @@ results <- get_power_logistic(
 
 # save results
 write.table(
-  results,
+  apply(results, 1, mean),
   "results/logistic_power_intb_ccp.dat",
   row.names = FALSE,
   col.names = FALSE

@@ -80,16 +80,16 @@ sum_mod <- summary(mod)
 
 # get power for range of betas
 results <- get_power_lm(data = da_intA,
-                              cond ="KGA_IntA",
-                              cov = "MW_Bio",
-                              intercept = mod$coefficients["(Intercept)"],
-                              beta_cond = mod$coefficients["KGA_IntA"],
-                              beta_cov = mod$coefficients["MW_Bio"],
-                              beta_int = beta_range, 
-                              res_std_error = sum_mod$sigma)
+                        cond ="KGA_IntA",
+                        cov = "MW_Bio",
+                        intercept = mod$coefficients["(Intercept)"],
+                        beta_cond = mod$coefficients["KGA_IntA"],
+                        beta_cov = mod$coefficients["MW_Bio"],
+                        beta_int = beta_range, 
+                        res_std_error = sum_mod$sigma)
 
 # save results
-write.table(results, "results/lm_power_inta_rebound.dat", row.names = FALSE, col.names = FALSE)
+write.table(apply(results, 1, mean), "results/lm_power_inta_rebound.dat", row.names = FALSE, col.names = FALSE)
 
 # Effect of intervention B on Rebound ----------------------------------------------------------------
 # the simulations are time-consuming, if you do not want to run them but 
@@ -110,7 +110,7 @@ results <- get_power_lm(data = da_intB,
                         res_std_error = sum_mod$sigma)
 
 # save results
-write.table(results, "results/lm_power_intb_rebound.dat", row.names = FALSE, col.names = FALSE)
+write.table(apply(results, 1, mean), "results/lm_power_intb_rebound.dat", row.names = FALSE, col.names = FALSE)
 
 # summarise results -------------------------------------------------------
 # read in results data
@@ -120,7 +120,7 @@ results_intb_rebound <- read.table("results/lm_power_intb_rebound.dat")$V1
 # plot power for range of interaction effects in model with 
 # intervention a and dependent variable rebound
 plotdat_inta_rebound <- data.frame(coefficient = beta_range,
-                               power = results_inta_rebound)
+                                   power = results_inta_rebound)
 ggplot(plotdat_inta_rebound, aes(x = coefficient, y = power)) +
   geom_path()+
   geom_hline(yintercept = power_targeted, linetype = 2)+
